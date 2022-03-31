@@ -1,22 +1,22 @@
 package com.nttdata.Spring.Taller3;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 import com.nttdata.Spring.Taller3.Entidades.Cliente;
-import com.nttdata.Spring.Taller3.Repository.RepositorioCliente;
-import com.nttdata.Spring.Taller3.Services.ServiciosCliente;
+import com.nttdata.Spring.Taller3.Servicios.ClienteServicios;
+
 
 @SpringBootApplication
 public class SpringTaller3Application implements CommandLineRunner {
 
 	@Autowired
-	ServiciosCliente cliente;
+	ClienteServicios cliente;
+
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringTaller3Application.class, args);
@@ -28,11 +28,19 @@ public class SpringTaller3Application implements CommandLineRunner {
 		Cliente uno = new Cliente("Pepe","Rodriguez" , new Date(),"47589873H" );
 		Cliente dos = new Cliente("Pepe","Morillo" , new Date(),"47589873J" );
 		Cliente tres = new Cliente("Antonio","Rodriguez" , new Date(),"47589873L" );
-		cliente.insert(uno);
-		cliente.insert(dos);
-		cliente.insert(tres);
-		cliente.delete(dos);
-		cliente.findByLastname("Rodriguez");
+		cliente.save(uno);
+		cliente.save(dos);
+		cliente.save(tres);
+		List<Cliente> buscarTodos = cliente.buscarTodos();
+		List<Cliente> buscarDni = cliente.buscarDni("47589873H");
+		cliente.borrar(dos);
+		System.out.println("\nTODOS\n");
+		buscarTodos.stream().forEach(cliente-> System.out.println(cliente.toString()));
+		System.out.println("\nDNI\n");
+		buscarDni.stream().forEach(cliente-> System.out.println(cliente.toString()));
+		buscarTodos = cliente.buscarTodos();
+		System.out.println("\nTODOS\n");
+		buscarTodos.stream().forEach(cliente-> System.out.println(cliente.toString()));
 		
 	}
 

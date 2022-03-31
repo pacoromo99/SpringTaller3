@@ -1,58 +1,78 @@
 package com.nttdata.Spring.Taller3.Entidades;
 
+
+
+import java.time.LocalDate;
 import java.util.Date;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
+
 
 @Entity
-public class Cliente 
-{
+@Table(name="Cliente")
+public class Cliente {
+	
 	@Id
-	@GeneratedValue
-	private Long idCliente;
-	private String nombreCliente;
-	private String apellidosCliente;
-	private Date nacimientoCliente;
-	private String dniCliente;
-	public Cliente(String nombreCliente, String apellidosCliente, Date nacimientoCliente,String dniCliente) {
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	@Column(name="nombre")
+	private String nombre;
+	@Column(name="apellidos")
+	private String apellidos;
+	@Column(name="fecha")
+	private Date fecha;
+	@Column(name="dni")
+	private String dni;
+	
+	public Cliente() {};
+	
+	public Cliente(String nombre, String apellidos, Date fecha, String dni) {
 		super();
-		this.nombreCliente = nombreCliente;
-		this.apellidosCliente = apellidosCliente;
-		this.nacimientoCliente = nacimientoCliente;
-		this.dniCliente = dniCliente;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.fecha = fecha;
+		this.dni = dni;
 	}
-	public Long getIdCliente() {
-		return idCliente;
+	public Long getId() {
+		return id;
 	}
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
+	public void setId(Long id) {
+		this.id = id;
 	}
-	public String getNombreCliente() {
-		return nombreCliente;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setNombreCliente(String nombreCliente) {
-		this.nombreCliente = nombreCliente;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
-	public String getApellidosCliente() {
-		return apellidosCliente;
+	public String getApellidos() {
+		return apellidos;
 	}
-	public void setApellidosCliente(String apellidosCliente) {
-		this.apellidosCliente = apellidosCliente;
+	public void setApellidos(String apellidos) {
+		this.apellidos = apellidos;
 	}
-	public Date getNacimientoCliente() {
-		return nacimientoCliente;
+	public Date getFecha() {
+		return fecha;
 	}
-	public void setNacimientoCliente(Date nacimientoCliente) {
-		this.nacimientoCliente = nacimientoCliente;
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
-	public String getDniCliente() {
-		return dniCliente;
+	public String getDni() {
+		return dni;
 	}
-	public void setDniCliente(String dniCliente) {
-		this.dniCliente = dniCliente;
+	public void setDni(String dni) {
+		this.dni = dni;
+	}
+
+	@Override
+	public String toString() {
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellidos=" + apellidos + ", fecha=" + fecha + ", dni="
+				+ dni + "]";
 	}
 	
-
 }
